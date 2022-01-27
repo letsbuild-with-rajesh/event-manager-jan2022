@@ -1,0 +1,51 @@
+.locations-container,.locations-container * {
+  color: white;
+}
+
+.locations-container {
+  padding: 12px;
+  width: 80%;
+}
+
+.locations-add label {
+  display: flex;
+}
+.locations-add input {
+  color: black;
+  width: 100%;
+}
+
+button.btn{
+  display: flex;
+  margin-left: 0;
+}
+
+.locations-list h2 {
+  display: flex;
+  padding: 24px 24px 24px 0px;
+}
+
+.locations-list li {
+  display: flex;
+  list-style-type: none;
+}
+
+.locations-list li:before{
+  content: '';
+  float: left;
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.locations-list li * {
+  display: flex;
+  width: 50%;
+}
+
+.locations-list li b {
+  color: red;
+}
+.delete-btn {
+  cursor: pointer;
+}

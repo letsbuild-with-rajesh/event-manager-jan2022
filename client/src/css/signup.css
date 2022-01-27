@@ -1,0 +1,25 @@
+.signup-container, .signup-container * {
+  color: white;
+  width: 100%;
+}
+
+.signup-form {
+  width: 80%;
+  margin: auto;
+}
+
+.signup-form h2 {
+  padding: 16px;
+}
+
+.signup-inputs {
+  padding: 10px 10px 10px 0px;
+}
+
+.signup-inputs label {
+  display: flex;
+  text-align: justify;
+}
+.signup-inputs input, .signup-inputs select, .signup-inputs select * {
+  color: black;
+}

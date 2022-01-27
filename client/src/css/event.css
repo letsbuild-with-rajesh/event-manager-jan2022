@@ -1,0 +1,38 @@
+.event-container, .event-container * {
+  color: white;
+  width: 100%;
+}
+
+.event-container {
+  width: 80%;
+}
+
+.event-details {
+  border: 1px solid;
+  padding: 8px;
+  margin: 16px 0px;
+  text-align: left;
+}
+
+.event-details li {
+  list-style-position: inside;
+}
+
+.event-comments h2 {
+  text-align: left;
+}
+
+.event-comments-add label {
+  display: flex;
+}
+
+.event-comments-add input {
+  color: black;
+}
+
+.event-comment {
+  border: 1px dashed;
+  padding: 8px;
+  margin: 16px 0px;
+  text-align: left;
+}

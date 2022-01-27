@@ -1,0 +1,39 @@
+.home-container, .home-container * {
+  color: white;
+  width: 100%;
+}
+
+.home-form {
+  width: 80%;
+  margin: auto;
+}
+
+.home-form h2 {
+  display: flex;
+  padding: 16px 10px;
+}
+
+.home-inputs {
+  padding: 10px;
+}
+
+.home-inputs label {
+  display: flex;
+}
+.home-inputs input, .home-inputs select, .home-inputs select *{
+  color: black;
+}
+
+.home-inputs-categories {
+  display: flex;
+  padding: 12px 0px;
+  width: max-content;
+}
+.home-inputs-checkbox label, .home-inputs-checkbox input {
+  width: max-content;
+}
+
+.home-inputs-checkbox input {
+  position: relative;
+  margin: 12px 8px;
+}

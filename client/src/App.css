@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: black;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-body {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1.5vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: white;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  padding: 12px 8px;
+  font-weight: 500;
+}
+
+nav .menu-options a {
+  text-decoration: revert;
+}
+
+.menuoptions, .signin-links {
+  padding: 12px 0px;
+}
+
+nav + div {
+  margin-top: 8vh;
+}
+
+.logo-link {
+  text-decoration: none;
+  border: 2px solid;
+  border-radius: 8%;
+  padding: 4px;
+  margin-left: 8px;
+}
+
+.btn {
+  background: cornflowerblue;
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: calc(10px + 1.5vmin);
+  margin: 20px;
+  width: max-content !important;
+}
+
+.btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.inputs-global-style input, .inputs-global-style select {
+  height: 4vh;
+}
+
+.inputs-global-style label {
+  padding: 0 0 4px 0;
+}

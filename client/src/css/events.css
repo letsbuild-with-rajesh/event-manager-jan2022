@@ -1,0 +1,63 @@
+.events-container,.events-container * {
+  color: white;
+}
+
+.events-container {
+  padding: 12px;
+}
+
+.events-filter {
+  padding: 24px 24px 24px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.events-filter label {
+  padding-right: 12px;
+}
+
+.events-filter select, .events-filter input {
+  width: 60vw;
+}
+
+.events-filter select, .events-filter select *, .events-filter input {
+  color: black;
+}
+
+.events-filterby {
+  margin: 8px 0px;
+}
+
+.events-filterby select, .events-filterby select *{
+  color: black;
+}
+
+.events-list h2 {
+  display: flex;
+  padding: 24px 24px 24px 0px;
+}
+
+.events-list li {
+  display: flex;
+  list-style-type: none;
+}
+
+.events-list li:before{
+  content: '';
+  float: left;
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.events-list li * {
+  display: flex;
+  width: 50%;
+}
+
+.events-list li b {
+  color: red;
+}
+.delete-icon {
+  cursor: pointer;
+}

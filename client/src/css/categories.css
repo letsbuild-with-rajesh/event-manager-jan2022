@@ -1,0 +1,55 @@
+.categories-container,.categories-container * {
+  color: white;
+}
+
+.categories-container {
+  padding: 12px;
+  width: 80%;
+}
+
+.categories-add label {
+  display: flex;
+}
+.categories-add input {
+  color: black;
+  width: 100%;
+}
+
+button.btn{
+  display: flex;
+  margin-left: 0;
+}
+
+.categories-list h2 {
+  display: flex;
+  padding: 24px 24px 24px 0px;
+}
+
+.categories-list li {
+  display: flex;
+  list-style-type: none;
+}
+
+.categories-list li:before{
+  content: '';
+  float: left;
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.categories-list li * {
+  display: flex;
+  width: 50%;
+}
+
+.categories-list li b {
+  color: red;
+}
+.categories-list li a {
+  text-decoration: none;
+}
+
+.delete-btn {
+  cursor: pointer;
+}
