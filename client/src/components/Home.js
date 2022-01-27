@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { requestToServer } from '../utils/utils';
 import '../css/home.css';
 
@@ -54,7 +54,8 @@ const Home = () => {
   }
   return (
     <div className="home-container">
-      <form className="home-form" onSubmit={submitHandler}>
+      {eventLocations.length > 0
+      ? <form className="home-form" onSubmit={submitHandler}>
         <h2>Create Event</h2>
         <div className="home-inputs">
           <label>Title</label>
@@ -76,7 +77,7 @@ const Home = () => {
             })}
           </select>
         </div>
-        <div className="home-inputs">
+        {categories.length > 0 && <div className="home-inputs">
           <label>Categories</label>
           <div className="home-inputs-categories">
             {categories.map((val, id)=>{
@@ -85,9 +86,12 @@ const Home = () => {
                      </div>
             })}
           </div>
-        </div>
+        </div>}
         <button className="btn" type="submit">Submit</button>
       </form>
+      :
+      <p>Please add atleast one location to create an event. <Link to="/locations">Click here</Link> </p>
+    }
     </div>
   );
 }

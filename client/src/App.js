@@ -10,8 +10,8 @@ import Events from './components/Events';
 import Event from './components/Event';
 import Categories from './components/Categories';
 import Locations from './components/Locations';
-import { isAuthenticatedUser, isAdminUser } from "./utils/utils";
-import { updateLogIn, updateIsAdmin } from "./components/actions";
+import { getAuthDetails, getUserDetails } from "./utils/utils";
+import { updateAuthDetails, updateUserDetails } from "./components/actions";
 import './App.css';
 
 function App() {
@@ -20,10 +20,12 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    const authenticated = await isAuthenticatedUser()
-    const adminUser = await isAdminUser()
-    dispatch(updateLogIn(authenticated))
-    dispatch(updateIsAdmin(adminUser))
+    const authDetails = await getAuthDetails()
+    const userDetails = await getUserDetails()
+
+    dispatch(updateAuthDetails(authDetails))
+    dispatch(updateUserDetails(userDetails))
+
     setLoading(false);
   }, [])
 
@@ -40,8 +42,9 @@ function App() {
                 <Route exact path="/signup" element={<SignUp />} />
                 <Route exact path="/events" element={<Events />} />
                 <Route exact path="/event/:id" element={<Event />} />
-                <Route exact path="/categories" element={<Categories />} />
-                <Route exact path="/locations" element={<Locations />} />
+                <Route exact path="/categories" element={loggedIn && isAdmin ? <Categories /> : <Navigate to="/" />} />
+                <Route exact path="/locations" element={loggedIn && isAdmin ? <Locations /> : <Navigate to="/" />} />
+                <Route exact path="*" element={<Navigate to="/" />} />
               </Routes>)
           }
         </Router>

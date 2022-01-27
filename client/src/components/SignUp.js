@@ -28,9 +28,6 @@ const SignUp = () => {
     }, false).then(data=> {
       if (data) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("email", data.email);
-        localStorage.setItem("role", data.role);
         navigate("/");
       }
     });
@@ -40,19 +37,19 @@ const SignUp = () => {
     <div className="signup-container">
       <form className="signup-form" onSubmit={submitHandler}>
         <h2>Sign Up</h2>
-        <div className="signup-inputs inputs-global-style">
+        <div className="signup-inputs">
           <label>Name</label>
           <input type="text" name="name"/>
         </div>
-        <div className="signup-inputs inputs-global-style">
+        <div className="signup-inputs">
           <label>Email address</label>
           <input type="email" name="email"/>
         </div>
-        <div className="signup-inputs inputs-global-style">
+        <div className="signup-inputs">
           <label>Password</label>
           <input type="password" name="password" />
         </div>
-        <div className="signup-inputs inputs-global-style">
+        <div className="signup-inputs">
           <label>Do you require admin access? (Please note that access is subject to approval)</label>
           <select defaultValue="no" name="role">
             <option value="yes">Yes</option>

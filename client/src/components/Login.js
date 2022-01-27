@@ -24,9 +24,6 @@ const Login = (props) => {
     }, false).then(data=> {
       if (data) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("email", data.email);
-        localStorage.setItem("role", data.role);
         window.location.reload(true);
       } else {
         alert('Invalid Credentials!')
@@ -38,11 +35,11 @@ const Login = (props) => {
     <div className="login-container">
       <form className="login-form" onSubmit={submitHandler}>
         <h2>Login</h2>
-        <div className="login-inputs inputs-global-style">
+        <div className="login-inputs">
           <label>Email address</label>
           <input type="email" name="email"/>
         </div>
-        <div className="login-inputs inputs-global-style">
+        <div className="login-inputs">
           <label>Password</label>
           <input type="password" name="password"/>
         </div>

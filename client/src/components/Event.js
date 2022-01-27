@@ -10,6 +10,7 @@ const Event = (props) => {
   let [ comment, setComment ] = useState('');
 
   const { loggedIn } = useSelector(state => state.auth);
+  const { name } = useSelector(state => state.user);
     
   useEffect(()=> {
     requestToServer("/apis/events/"+id).then(data=>{ setEvent(data)});
@@ -22,7 +23,7 @@ const Event = (props) => {
   const clickHandler = () => {
     let commentData = {
       comment,
-      commentBy: localStorage.getItem("name")
+      commentBy: name
     }
     requestToServer("/apis/events/"+id, {
       method: 'POST',

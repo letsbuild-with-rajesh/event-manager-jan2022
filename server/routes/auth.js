@@ -3,7 +3,6 @@ const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-const authValidator = require("../utils/utils");
 const User = require("../model/User");
 
 router.post(
@@ -140,29 +139,6 @@ router.post(
       res.status(500).json({
         message: "Server Error"
       });
-    }
-  }
-);
-
-router.post(
-  "/isAuthenticated",
-  [],
-  authValidator,
-  async (req, res) => {
-    const errors = validationResult(req);
-    res.status(200).json({"authenticated": true});
-  }
-);
-
-router.post(
-  "/isAdminUser",
-  [],
-  authValidator,
-  async (req, res) => {
-    if (req.user.role === 'admin') {
-      res.status(200).json({"isadmin": true});
-    } else {
-      res.status(403).json({"isadmin": false});
     }
   }
 );

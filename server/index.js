@@ -4,6 +4,8 @@ const auth = require("./routes/auth");
 const events = require("./routes/events");
 const locations = require("./routes/locations");
 const categories = require("./routes/categories");
+const authDetails = require("./routes/authDetails");
+const userDetails = require("./routes/userDetails");
 const ConnectToMongoServer = require("./config/db");
 const dotenv = require('dotenv');
 
@@ -18,6 +20,8 @@ const PORT = process.env.PORT;
 app.use(bodyParser.json());
 
 app.use("/auth", auth);
+app.use("/apis/getAuthDetails", authDetails);
+app.use("/apis/getUserDetails", userDetails);
 app.use("/apis/events", events);
 app.use("/apis/locations", locations);
 app.use("/apis/categories", categories);

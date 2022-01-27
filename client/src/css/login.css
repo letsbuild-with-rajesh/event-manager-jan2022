@@ -22,3 +22,7 @@
 .login-inputs input {
   color: black;
 }
+
+.login-form button.btn {
+  margin: 20px;
+}

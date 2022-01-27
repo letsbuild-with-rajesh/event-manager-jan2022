@@ -4,14 +4,17 @@ import { requestToServer } from '../utils/utils';
 import '../css/categories.css';
 
 const Categories = () => {
-  let [ addCategory, setAddCategory] = useState('');
-  let [ categories, setCategories ] = useState(null);
-  let [ events, setEvents] = useState(null);
+  const [ addCategory, setAddCategory] = useState('');
+  const [ categories, setCategories ] = useState(null);
+  const [ events, setEvents] = useState(null);
+
+  const [ loading, setLoading ] = useState(true)
   let categoryEventObj = {};
 
-  useEffect(()=> {
-    requestToServer("/apis/categories").then(data=>{ setCategories(data) });
-    requestToServer("/apis/events").then(data=>{ setEvents(data) });
+  useEffect(async()=> {
+    await requestToServer("/apis/categories").then(data=>{ setCategories(data) });
+    await requestToServer("/apis/events").then(data=>{ setEvents(data) });
+    setLoading(false);
   }, []);
 
   const calcNumOfEvents = (cat) => {
@@ -44,13 +47,17 @@ const Categories = () => {
     });
   }
 
-  const deleteCategory = (id, value) => {
+  const deleteCategory = async (id, value) => {
     if (categoryEventObj[value] > 0) {
       alert("This category is assigned to event(s)");
     } else {
-      requestToServer("/apis/categories/"+id, { method: 'DELETE' });
+      await requestToServer("/apis/categories/"+id, { method: 'DELETE' });
       window.location.reload(true);
     }
+  }
+
+  if (loading) {
+    return <div/>
   }
 
   return (
@@ -63,7 +70,7 @@ const Categories = () => {
       <div className="categories-list">
         <h2>Categories</h2>
         {!categories || categories.length === 0 ? 
-          <div>No categories added yet!</div>
+          <div>No categories to show!</div>
           :
           <ul>
             {categories.map((val, id) =>{
@@ -80,4 +87,4 @@ const Categories = () => {
   );
 }
 
-export default AuthHOC(Categories, { authRequired: true });
+export default AuthHOC(Categories);

@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { isAuthenticatedUser } from '../utils/utils';
 
-const AuthHOC = (Component, options) => {
+const AuthHOC = (Component, options = { authRequired: true, authAsAdmin: true} ) => {
   const WrapperComponent = () => {
-    let { authRequired = true, authAsAdmin = false } = options
+    let { authRequired, authAsAdmin } = options
     const { loggedIn, isAdmin } = useSelector(state => state.auth);
+    let alerted = false;
 
     if (authRequired && !loggedIn) {
       alert('This page requires you to logged in!')
       return <Navigate to="/" />
+    } else if (authRequired && authAsAdmin && !isAdmin) {
+      alert('This page requires admin access!')
+      return <Navigate to="/" />
     }
+    
     return <Component/>
   }
   return WrapperComponent;

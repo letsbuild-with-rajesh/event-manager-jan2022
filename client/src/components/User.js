@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../css/user.css';
 
 const User = () => {
@@ -11,7 +12,7 @@ const User = () => {
         <div>Name : {user.name}</div>
         <div>Email : {user.email}</div>
         <br/>
-        <div>Click on the events hyperlink on the header to view events!</div>
+        <p><Link to="/events">Click here</Link> to view events</p>
       </div>
     </div>
   );

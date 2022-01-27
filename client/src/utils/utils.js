@@ -1,17 +1,17 @@
-export const isAuthenticatedUser = async () => {
-  let isAuthenticated = false;
-  isAuthenticated = await requestToServer("/auth/isAuthenticated", { method: 'POST'})
-    .then(res => res ? true : false)
+export const getAuthDetails = async () => {
+  let authDetails = {}
+  authDetails = await requestToServer("/apis/getAuthDetails")
+    .then(res => res ? res : {})
     .catch(err => console.log(err))
-  return isAuthenticated;
+  return authDetails;
 }
 
-export const isAdminUser = async () => {
-  let isAdmin = false;
-  isAdmin = await requestToServer("/auth/isAdminUser", { method: 'POST' })
-    .then(res => res ? true : false)
+export const getUserDetails = async () => {
+  let userDetails = {};
+  userDetails = await requestToServer("/apis/getUserDetails")
+    .then(res => res ? res : {})
     .catch(err => console.log(err))
-  return isAdmin;
+  return userDetails;
 }
 
 export const requestToServer = async (url, reqObj, addToken = true)=> {

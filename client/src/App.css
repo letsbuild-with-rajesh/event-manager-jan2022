@@ -49,10 +49,6 @@ nav .menu-options a {
   padding: 12px 0px;
 }
 
-nav + div {
-  margin-top: 8vh;
-}
-
 .logo-link {
   text-decoration: none;
   border: 2px solid;
@@ -77,10 +73,14 @@ nav + div {
   justify-content: center;
 }
 
-.inputs-global-style input, .inputs-global-style select {
+label {
+  padding: 0 0 4px 0;
+}
+
+input, select {
   height: 4vh;
 }
 
-.inputs-global-style label {
-  padding: 0 0 4px 0;
+input[type='checkbox'] {
+  height: auto;
 }

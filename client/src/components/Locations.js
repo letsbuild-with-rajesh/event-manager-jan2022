@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
+import AuthHOC from "./AuthHOC";
 import { requestToServer } from '../utils/utils';
 import '../css/locations.css';
 
 const Locations = () => {
-  let [ addLocation, setAddLocation] = useState('');
-  let [ locations, setLocations] = useState(null);
-  let [ events, setEvents] = useState(null);
+  const [ addLocation, setAddLocation] = useState('');
+  const [ locations, setLocations] = useState(null);
+  const [ events, setEvents] = useState(null);
+
+  const [ loading, setLoading ] = useState(true)
+
   let locationEventObj = {};
 
-  useEffect(()=> {
-    requestToServer("/apis/locations").then(data=>{ setLocations(data) });
-    requestToServer("/apis/events").then(data=>{ setEvents(data) });
+  useEffect(async()=> {
+    await requestToServer("/apis/locations").then(data=>{ setLocations(data) });
+    await requestToServer("/apis/events").then(data=>{ setEvents(data) });
+    setLoading(false);
   }, []);
 
   const calcNumOfEvents = (loc) => {
@@ -43,13 +48,17 @@ const Locations = () => {
     });
   }
 
-  const deleteLocation = (id, value) => {
+  const deleteLocation = async (id, value) => {
     if (locationEventObj[value] > 0) {
       alert("This location is assigned to event(s)");
     } else {
-      requestToServer("/apis/locations/"+id, { method: 'DELETE' });
+      await requestToServer("/apis/locations/"+id, { method: 'DELETE' });
       window.location.reload(true);
     }
+  }
+
+  if (loading) {
+    return <div/>
   }
 
   return (
@@ -62,7 +71,7 @@ const Locations = () => {
       <div className="locations-list">
         <h2>Locations</h2>
         {!locations || locations.length === 0 ? 
-          <div>No locations added yet!</div>
+          <div>No locations to show!</div>
           :
           <ul>
             {locations.map((val, id) =>{
@@ -79,4 +88,4 @@ const Locations = () => {
   );
 }
 
-export default Locations
+export default AuthHOC(Locations, { authRequired: true, authAsAdmin: true });

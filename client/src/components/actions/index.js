@@ -1,16 +1,16 @@
-export const UPDATE_LOGGED_IN = 'UPDATE_LOGGED_IN'
-export const UPDATE_IS_ADMIN = 'UPDATE_IS_ADMIN'
+export const UPDATE_AUTH_DETAILS = 'UPDATE_AUTH_DETAILS'
+export const UPDATE_USER_DETAILS = 'UPDATE_USER_DETAILS'
 
-export function updateLogIn(loginState) {
+export function updateAuthDetails(details) {
 	return {
-		 type: UPDATE_LOGGED_IN,
-		 payload: loginState
+		 type: UPDATE_AUTH_DETAILS,
+		 payload: details
 	}
 }
 
-export function updateIsAdmin(isAdmin) {
+export function updateUserDetails(details) {
 	return {
-		 type: UPDATE_IS_ADMIN,
-		 payload: isAdmin
+		 type: UPDATE_USER_DETAILS,
+		 payload: details
 	}
 }

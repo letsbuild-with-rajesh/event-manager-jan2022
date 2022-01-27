@@ -6,19 +6,22 @@ import { requestToServer } from '../utils/utils';
 import '../css/events.css';
 
 const Events = () => {
-  let [ filterBy, setFilterBy ] = useState("none");
-  let [ filteredEvents, setFilteredEvents ] = useState([]);
+  const [ filterBy, setFilterBy ] = useState("none");
+  const [ filteredEvents, setFilteredEvents ] = useState([]);
+  
+  const [ events, setEvents ] = useState([]);
+  const [ locations, setLocations ] = useState([]);
+  const [ categories, setCategories ] = useState([]);
 
-  let [ events, setEvents ] = useState([]);
-  let [ locations, setLocations ] = useState([]);
-  let [ categories, setCategories ] = useState([]);
+  const [ loading, setLoading ] = useState(true)
 
   const { loggedIn, isAdmin } = useSelector(state => state.auth);
 
-  useEffect(()=> {
-    requestToServer("/apis/events/").then(data=>{ setEvents(data); setFilteredEvents(data)});
-    requestToServer("/apis/locations/").then(data=>{ setLocations(data)});
-    requestToServer("/apis/categories/").then(data=>{ setCategories(data)});
+  useEffect(async () => {
+    await requestToServer("/apis/events/").then(data=>{ setEvents(data); setFilteredEvents(data)});
+    await requestToServer("/apis/locations/").then(data=>{ setLocations(data)});
+    await requestToServer("/apis/categories/").then(data=>{ setCategories(data)});
+    setLoading(false);
   }, []);
 
   const updateEvents = (value) => {
@@ -50,14 +53,19 @@ const Events = () => {
     return null;
   }
 
-  const deleteEvent = (id) => {
-    requestToServer("/apis/events/"+id, { method: 'DELETE' });
+  const deleteEvent = async (id) => {
+    await requestToServer("/apis/events/"+id, { method: 'DELETE' });
     window.location.reload(true);
+  }
+
+  if (loading) {
+    return <div/>
   }
 
   return (
     <div className="events-container">
       <h2>Events</h2>
+      <h4><Link to="/">(Add Event)</Link></h4>
       {events.length > 0 && <div className="events-filter">
         <label>Filter by:</label>
         <div>
