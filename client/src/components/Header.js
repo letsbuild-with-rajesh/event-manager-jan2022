@@ -1,10 +1,9 @@
 import  React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { isLoggedin, isAdminUser } from '../utils/utils';
 
 const Header = () => {
-  const isLoggedIn = isLoggedin();
-  const isAdmin = isAdminUser();
+  const { loggedIn, isAdmin } = useSelector(state => state.auth);
 
   const signoutHandler = () => {
     localStorage.clear();
@@ -15,13 +14,13 @@ const Header = () => {
       <Link className="logo-link" to="/"><b>Logo</b></Link>
       <div className="menu-options">
         <Link className="" to="/events">Events</Link>
-        {isLoggedIn && isAdmin &&
+        {loggedIn && isAdmin &&
            (<><Link to="/categories">Categories</Link>
               <Link to="/locations">Locations</Link>
             </>)}
       </div>
       <div className="signin-links">
-        {isLoggedIn ?
+        {loggedIn ?
           <Link to="/" onClick={signoutHandler}>Sign Out</Link>
           :
           <>

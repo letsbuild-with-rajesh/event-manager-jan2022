@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import AuthHOC from "./AuthHOC";
 import { requestToServer } from '../utils/utils';
 import '../css/categories.css';
 
@@ -80,4 +80,4 @@ const Categories = () => {
   );
 }
 
-export default Categories;
+export default AuthHOC(Categories, { authRequired: true });

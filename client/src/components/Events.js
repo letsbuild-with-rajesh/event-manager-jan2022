@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { isLoggedin, isAdminUser, requestToServer } from '../utils/utils';
+import AuthHOC from './AuthHOC';
+import { requestToServer } from '../utils/utils';
 import '../css/events.css';
 
 const Events = () => {
@@ -10,6 +12,8 @@ const Events = () => {
   let [ events, setEvents ] = useState([]);
   let [ locations, setLocations ] = useState([]);
   let [ categories, setCategories ] = useState([]);
+
+  const { loggedIn, isAdmin } = useSelector(state => state.auth);
 
   useEffect(()=> {
     requestToServer("/apis/events/").then(data=>{ setEvents(data); setFilteredEvents(data)});
@@ -77,7 +81,7 @@ const Events = () => {
               return <li key={"events-" + id}>
                        <div>{val.name}</div>
                        <Link to={"/event/" + val._id}>View Event</Link>
-                       {isLoggedin() && isAdminUser() && <div className="delete-icon" onClick={()=>{deleteEvent(val._id)}}><b>&#10006;</b></div>}
+                       {loggedIn && isAdmin && <div className="delete-icon" onClick={()=>{deleteEvent(val._id)}}><b>&#10006;</b></div>}
                      </li>
             })}
           </ul>
@@ -87,4 +91,4 @@ const Events = () => {
   );
 }
 
-export default Events;
+export default AuthHOC(Events, { authRequired: false, authAsAdmin: false });

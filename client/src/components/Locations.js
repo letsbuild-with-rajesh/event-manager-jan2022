@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
 import { requestToServer } from '../utils/utils';
 import '../css/locations.css';
 
@@ -80,4 +79,4 @@ const Locations = () => {
   );
 }
 
-export default Locations;
+export default Locations

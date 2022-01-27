@@ -28,6 +28,9 @@ const Login = (props) => {
         localStorage.setItem("email", data.email);
         localStorage.setItem("role", data.role);
         window.location.reload(true);
+      } else {
+        alert('Invalid Credentials!')
+        localStorage.clear();
       }
     });
   }

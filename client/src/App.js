@@ -1,5 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
+import { useSelector, useDispatch } from "react-redux";
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
@@ -9,24 +10,40 @@ import Events from './components/Events';
 import Event from './components/Event';
 import Categories from './components/Categories';
 import Locations from './components/Locations';
-import { isLoggedin, isAdminUser } from './utils/utils';
+import { isAuthenticatedUser, isAdminUser } from "./utils/utils";
+import { updateLogIn, updateIsAdmin } from "./components/actions";
+import './App.css';
 
 function App() {
-  let isLoggedIn = isLoggedin();
+  const { loggedIn, isAdmin } = useSelector(state => state.auth);
+  const [ loading, setLoading ] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    const authenticated = await isAuthenticatedUser()
+    const adminUser = await isAdminUser()
+    dispatch(updateLogIn(authenticated))
+    dispatch(updateIsAdmin(adminUser))
+    setLoading(false);
+  }, [])
 
   return (
     <div className="App">
       <div className="App-body">
         <Router>
-          <Header/>
-          <Routes>
-            <Route exact path="/" element={isLoggedIn ? (isAdminUser() ? <Home/> : <User/>) : <Login/>} />
-            <Route exact path="/signup" element={<SignUp/>} />
-            <Route exact path="/events" element={<Events/>} />
-            <Route exact path="/event/:id" element={<Event/>} />
-            <Route exact path="/categories" element={isLoggedIn && isAdminUser() ? <Categories/> : <Navigate to="/"/>} />
-            <Route exact path="/locations" element={isLoggedIn && isAdminUser() ? <Locations/> : <Navigate to="/"/>} />
-          </Routes>
+          <Header />
+          {
+            loading
+              ? <div>Loading...</div>
+              : (<Routes>
+                <Route exact path="/" element={loggedIn ? (isAdmin ? <Home /> : <User />) : <Login />} />
+                <Route exact path="/signup" element={<SignUp />} />
+                <Route exact path="/events" element={<Events />} />
+                <Route exact path="/event/:id" element={<Event />} />
+                <Route exact path="/categories" element={<Categories />} />
+                <Route exact path="/locations" element={<Locations />} />
+              </Routes>)
+          }
         </Router>
       </div>
     </div>

@@ -36,7 +36,6 @@ const Home = () => {
       categories: selectedCategories
     }
 
-    console.log(eventData);
     if (!eventData.name || !eventData.description || !eventData.date || !eventData.location) {
       alert("Please provide all details!");
       return;
@@ -93,4 +92,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Home

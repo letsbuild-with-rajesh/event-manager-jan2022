@@ -47,7 +47,10 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id
+          id: user.id,
+          name,
+          email,
+          role
         }
       };
 
@@ -109,7 +112,10 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role
         }
       };
 
@@ -145,6 +151,19 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     res.status(200).json({"authenticated": true});
+  }
+);
+
+router.post(
+  "/isAdminUser",
+  [],
+  authValidator,
+  async (req, res) => {
+    if (req.user.role === 'admin') {
+      res.status(200).json({"isadmin": true});
+    } else {
+      res.status(403).json({"isadmin": false});
+    }
   }
 );
 
