@@ -12,20 +12,23 @@ const Locations = () => {
 
   let locationEventObj = {};
 
-  useEffect(async()=> {
-    await requestToServer("/apis/locations").then(data=>{ setLocations(data) });
-    await requestToServer("/apis/events").then(data=>{ setEvents(data) });
-    setLoading(false);
+  useEffect(()=> {
+    async function init() {
+      await requestToServer("/apis/locations").then(data=>{ setLocations(data) });
+      await requestToServer("/apis/events").then(data=>{ setEvents(data) });
+      setLoading(false);
+    }
+    init();
   }, []);
 
   const calcNumOfEvents = (loc) => {
     let count = 0;
     if (events !== null) {
-      events.map((val) => {
-        if (val.location === loc) {
+      for (let i = 0; i < events.length; i++) {
+        if (events[i].location === loc) {
           count += 1;
         }
-      });
+      }
     }
     locationEventObj[loc] = count;
     return count;

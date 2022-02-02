@@ -8,7 +8,7 @@ import '../css/events.css';
 const Events = () => {
   const [ filterBy, setFilterBy ] = useState("none");
   const [ filteredEvents, setFilteredEvents ] = useState([]);
-  
+
   const [ events, setEvents ] = useState([]);
   const [ locations, setLocations ] = useState([]);
   const [ categories, setCategories ] = useState([]);
@@ -17,11 +17,14 @@ const Events = () => {
 
   const { loggedIn, isAdmin } = useSelector(state => state.auth);
 
-  useEffect(async () => {
-    await requestToServer("/apis/events/").then(data=>{ setEvents(data); setFilteredEvents(data)});
-    await requestToServer("/apis/locations/").then(data=>{ setLocations(data)});
-    await requestToServer("/apis/categories/").then(data=>{ setCategories(data)});
-    setLoading(false);
+  useEffect(() => {
+    async function init() {
+      await requestToServer("/apis/events/").then(data=>{ setEvents(data); setFilteredEvents(data)});
+      await requestToServer("/apis/locations/").then(data=>{ setLocations(data)});
+      await requestToServer("/apis/categories/").then(data=>{ setCategories(data)});
+      setLoading(false);
+    }
+    init();
   }, []);
 
   const updateEvents = (value) => {

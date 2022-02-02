@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const bodyParser = require("body-parser");
 const auth = require("./routes/auth");
 const events = require("./routes/events");
@@ -16,9 +17,15 @@ ConnectToMongoServer();
 const app = express();
 
 const PORT = process.env.PORT;
+const CLIENT_DIR = __dirname + "/../client/";
+
+app.use(express.static(path.join(CLIENT_DIR, 'build')))
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, 'build', 'index.html'))
+})
 
 app.use(bodyParser.json());
-
 app.use("/auth", auth);
 app.use("/apis/getAuthDetails", authDetails);
 app.use("/apis/getUserDetails", userDetails);
