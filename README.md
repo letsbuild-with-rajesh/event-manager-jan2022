@@ -10,7 +10,7 @@ React.js + Node.js + MongoDB
 <details><summary>Click to show/hide a demo gif</summary>
 <p>
 
-![Loading demo gif ...](https://github.com/letsbuild-with-rajesh/event-manager-jan2022/blob/main/client/public/demo-web.gif?raw=true)
+![Loading demo gif ...](https://github.com/letsbuild-with-rajesh/event-manager-jan2022/blob/main/client/public/demo.gif?raw=true)
 
 </p>
 </details>
