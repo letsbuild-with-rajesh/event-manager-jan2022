@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import Login from './components/Login';
 import SignUp from './components/SignUp';
@@ -36,7 +36,7 @@ function App() {
           <Header />
           {
             loading
-              ? <div>Loading...</div>
+              ? <div/>
               : (<Routes>
                 <Route exact path="/" element={loggedIn ? (isAdmin ? <Home /> : <User />) : <Login />} />
                 <Route exact path="/signup" element={<SignUp />} />

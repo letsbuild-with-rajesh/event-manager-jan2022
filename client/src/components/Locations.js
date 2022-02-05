@@ -73,7 +73,7 @@ const Locations = () => {
       <button className="btn" onClick={clickHandler}>Add</button>
       <div className="locations-list">
         <h2>Locations</h2>
-        {!locations || locations.length === 0 ? 
+        {!locations || locations.length === 0 ?
           <div>No locations to show!</div>
           :
           <ul>

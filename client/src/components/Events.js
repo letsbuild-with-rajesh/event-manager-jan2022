@@ -68,7 +68,7 @@ const Events = () => {
   return (
     <div className="events-container">
       <h2>Events</h2>
-      <h4><Link to="/">(Add Event)</Link></h4>
+      {loggedIn && isAdmin && <h4><Link to="/">(Add Event)</Link></h4>}
       {events.length > 0 && <div className="events-filter">
         <label>Filter by:</label>
         <div>
@@ -84,7 +84,7 @@ const Events = () => {
       </div>}
       <br/>
       <div className="events-list">
-        {filteredEvents.length === 0 ? 
+        {filteredEvents.length === 0 ?
           <div>No events to show!</div>
           :
           <ul>
